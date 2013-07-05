@@ -1,0 +1,35 @@
+<html>
+  <head>
+
+  </head>
+  <body>
+
+    <div id="Update" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="AddLabel">Add/Edit level</h3>
+  </div>
+  <div class="modal-body">
+
+      <%= simple_form_for @project_update, :url => { :action => "update" }, :html => { :class => 'form-horizontal', :id => "updateProjectForm", :onsubmit => "update()" }, :remote => true do |project| %>
+          <%= project.input :id, :as => :hidden %>
+          <%= project.input :name, :label => "Project name:" %>
+          <%= project.input :client, :label => "Client:", :collection => Client.all.map{|client| [client.last_name, client.id]}, :selected => @project_update.client.id %>
+          <%= project.input :manager, :label => "Manager:", :collection => Manager.all.map{|manager| [manager.last_name, manager.id]}, :selected => @project_update.manager.id %>
+          <%= project.input :status, :label => "Status:", :collection => Status.all.map{|status| [status.title, status.id]}, :selected => "1" %>
+          <%= project.input :date_of_start, :as => :string, input_html: { class: 'datepicker' } %>
+          <%= project.input :deadline, :as => :string, input_html: { class: 'datepicker' } %>
+          <%= project.input :totally, :as => :float, :label => "Totally:" %>
+          <%= project.input :currency, :label => "Currency:", :collection => Currency.all.map{|currency| [currency.title, currency.id]}, :selected => @project_update.currency.id %>
+          <%= project.input :paid, :as => :float, :label => "Paid:" %>
+          <%= project.input :to_pay, :as => :float, :label => "To pay:" %>
+          <%= project.input :comment, :as => :text, :label => "Comment:" %>
+          <%= project.collection_check_boxes :programmer_ids, Programmer.all, :id, :last_name, :item_wrapper_class => 'check_boxes' %>
+          <%= project.button :submit %>
+          <% end %>
+
+  </div>
+
+  </body>
+
+</html

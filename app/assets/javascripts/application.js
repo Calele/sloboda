@@ -19,6 +19,9 @@
 //= require jquery.validate.additional-methods
 
 
+
+
+
 $(document).ready(function() 
 {
 
@@ -26,8 +29,20 @@ $(document).ready(function()
   {
     var project_id = $(this).attr('project-id');
     console.log(project_id);
+    $.ajax
+    ({
+      type: 'POST',
+      url: 'project/update',
+      data: {project_id: project_id},
+      success: function(html)
+      {
+        $(".modalwindow").html(html);
+        $("#Update").modal('show');
+      }
+    });
 
   });
+
   $("#a_Add").click(function()
   {
     console.log("sldk");
@@ -56,7 +71,7 @@ $(document).ready(function()
   ({
     rules : 
     {
-      "project[name]": {required: true},
+      // "project[name]": {required: true},
       "project[date_of_start]": {required: true, deadline: true},
       "project[deadline]": {required: true, deadline: true},
       "project[totally]": {required: true, digits: true},
@@ -66,12 +81,35 @@ $(document).ready(function()
     }
   });
 
+  $(".delete").click(function()
+  {
+    if (confirm('Удалить проект?'))
+    {
+      var id_project = $(this).attr('id-project');
+      // console.log(id_project)
+      $.ajax
+      ({
+        type: 'POST',
+        url: 'project/delete',
+        data: {id_project: id_project}
+      });
+    }
+  });
+
 });
+
+function update() 
+{
+  var msg = $('form#updateProjectForm').serialize();
+  msg = JSON.stringify(msg);
+  console.log(msg);
+
+}
 
 function call() 
 {
-    var msg = $('form#addProjectForm').serialize();
-    msg = JSON.stringify(msg);
-    console.log(msg);
+  var msg = $('form#addProjectForm').serialize();
+  msg = JSON.stringify(msg);
+  console.log(msg);
 
 }

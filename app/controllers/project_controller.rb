@@ -1,5 +1,6 @@
 class ProjectController < ApplicationController
   def projects
+
     @projects_all = Project.all
     @project_new = Project.new
     @clients_all = Client.all
@@ -26,20 +27,81 @@ class ProjectController < ApplicationController
       new_project.to_pay = params[:project][:to_pay] 
       new_project.comment = params[:project][:comment]
 
-    new_project.save
 
-    last_project = Project.last
+    if new_project.save
 
-    params[:project][:programmer_ids].each do |programmer_id|
-      unless programmer_id == ""
-        programmer_project = ProgrammerProject.new
-        programmer_project.programmer_id = programmer_id
-        programmer_project.project_id = last_project.id
-        programmer_project.save
+      last_project = Project.last
+
+      params[:project][:programmer_ids].each do |programmer_id|
+        unless programmer_id == ""
+          programmer_project = ProgrammerProject.new
+          programmer_project.programmer_id = programmer_id
+          programmer_project.project_id = last_project.id
+          programmer_project.save
+        end
+      end
+      render js: "location.reload();"
+
+    else
+
+      render js: "alert('Didn`t save. Please, try againe!');"
+
+    end
+  end
+
+  def delete
+    # binding.pry
+    Project.find(params[:id_project]).destroy
+    ProgrammerProject.where("project_id = ?", params[:id_project]).each do |p_p|
+      p_p.destroy
+    end
+    render js: "location.reload();"
+  end
+
+  def update
+    # binding.pry
+    unless params[:project_id].nil?
+
+      @project_update = Project.find(params[:project_id])
+      @programmer_ids = Programmer.select("id")
+      @programmer_last_names = Programmer.select("last_name")
+      updated = false
+      render :partial => 'update'
+
+    else
+      updated = Project.update(params[:project][:id], 
+        :client_id => params[:project][:client], 
+        :currency_id => params[:project][:currency],
+        :name => params[:project][:name],
+        :manager_id => params[:project][:manager],
+        :status_id => params[:project][:status],
+        :date_of_start => params[:project][:date_of_start],
+        :deadline => params[:project][:deadline],
+        :totally => params[:project][:totally],
+        :paid => params[:project][:paid],
+        :to_pay => params[:project][:to_pay],
+        :comment => params[:project][:comment])
+
+      if updated
+        ProgrammerProject.where("project_id = ?", params[:project][:id]).each do |p_p|
+          p_p.destroy
+        end
+
+        updated_project = Project.find(params[:project][:id])
+
+        params[:project][:programmer_ids].each do |programmer_id|
+          unless programmer_id == ""
+            programmer_project = ProgrammerProject.new
+            programmer_project.programmer_id = programmer_id
+            programmer_project.project_id = updated_project.id
+            programmer_project.save
+          end
+        end  
+        render js: "location.reload();"
+      else
+        render js: "alert('Didn`t update. Please, try againe!');"
       end
     end
-        # binding.pry
-        render js: "location.reload();"
   end
 
 end

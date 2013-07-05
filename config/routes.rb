@@ -36,6 +36,8 @@ SlobodaDoc::Application.routes.draw do
 
   get "project/projects"
 
+  get "project/delete"
+
   post "project/projects"
 
   get "project/areas"
@@ -43,6 +45,12 @@ SlobodaDoc::Application.routes.draw do
   get "project/new"
 
   post "/project/new"
+
+  post "/project/delete"
+
+  put "project/update"
+
+  post "/project/update"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
