@@ -2,33 +2,35 @@ SlobodaDoc::Application.routes.draw do
 
   get "programmer/show"
 
-  get "programmer/new"
+  post "programmer/show"
 
-  get "programmer/update"
+  post "programmer/new"
+
+  put "programmer/update"
+
+  post "programmer/update"
 
   get "programmer/delete"
 
   get "manager/show"
 
-  get "manager/new"
+  post "manager/show"
 
-  get "manager/update"
+  post "manager/new"
+
+  post "manager/update"
+
+  put "manager/update"
 
   get "manager/delete"
 
-  get "currency/show"
-
-  get "currency/new"
-
-  get "currency/update"
-
-  get "currency/delete"
-
   get "client/show"
 
-  get "client/new"
+  post "client/new"
 
-  get "client/update"
+  put "client/update"
+
+  post "client/update"
 
   get "client/delete"
 
@@ -36,13 +38,9 @@ SlobodaDoc::Application.routes.draw do
 
   get "project/projects"
 
-  get "project/delete"
-
   post "project/projects"
 
   get "project/areas"
-
-  get "project/new"
 
   post "/project/new"
 

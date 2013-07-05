@@ -4,11 +4,12 @@
   </head>
   <body>
 
+<!-- , data: { confirm: "Are you sure?" } -->
+
     <div class="btn-group">
-      <button class="btn"><%= link_to "Programmers", {controller: "programmer", action: "show"}, data: { confirm: "Are you sure?" }  %></button>
+      <button class="btn"><%= link_to "Programmers", {controller: "programmer", action: "show"}  %></button>
       <button class="btn"><%= link_to "Managers", controller: "manager", action: "show" %></button>
       <button class="btn"><%= link_to "Clients", controller: "client", action: "show" %></button>
-      <button class="btn"><%= link_to "Currencies", controller: "currency", action: "show" %></button>
       <button class="btn"><%= link_to "Projects", controller: "project", action: "projects" %></button>
     </div>
     <p>
@@ -57,7 +58,7 @@
                 <a 
                 id-project="<%= project.id %>" 
                 role="button" 
-                class="btn delete">Delete
+                class="btn delete-project">Delete
                 </a>
               </td>
             </tr>
@@ -69,11 +70,11 @@
     <div id="Add" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="AddLabel">Add/Edit level</h3>
+    <h3 id="AddLabel">Add</h3>
   </div>
   <div class="modal-body">
 
-      <%= simple_form_for @project_new, :url => { :action => "new" }, :html => { :class => 'form-horizontal', :id => "addProjectForm", :onsubmit => "call()" }, :remote => true do |project| %>
+      <%= simple_form_for @project_new, :url => { :action => "new" }, :html => { :class => 'form-horizontal', :id => "addForm", :onsubmit => "add()" }, :remote => true do |project| %>
           <%= project.input :name, :label => "Project name:" %>
           <%= project.input :client, :label => "Client:", :collection => @clients_all.map{|client| [client.last_name, client.id]}, :selected => "1" %>
           <%= project.input :manager, :label => "Manager:", :collection => @managers_all.map{|manager| [manager.last_name, manager.id]}, :selected => "1" %>
@@ -97,4 +98,4 @@
 
   </body>
 
-</html
+</html>

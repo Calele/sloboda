@@ -7,11 +7,11 @@
     <div id="Update" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="AddLabel">Add/Edit level</h3>
+    <h3 id="AddLabel">Edit</h3>
   </div>
   <div class="modal-body">
 
-      <%= simple_form_for @project_update, :url => { :action => "update" }, :html => { :class => 'form-horizontal', :id => "updateProjectForm", :onsubmit => "update()" }, :remote => true do |project| %>
+      <%= simple_form_for @project_update, :url => { :action => "update" }, :html => { :class => 'form-horizontal', :id => "updateForm", :onsubmit => "update()" }, :remote => true do |project| %>
           <%= project.input :id, :as => :hidden %>
           <%= project.input :name, :label => "Project name:" %>
           <%= project.input :client, :label => "Client:", :collection => Client.all.map{|client| [client.last_name, client.id]}, :selected => @project_update.client.id %>
