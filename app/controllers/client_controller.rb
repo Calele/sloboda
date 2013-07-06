@@ -29,5 +29,7 @@ class ClientController < ApplicationController
   end
 
   def delete
+    Client.find(params[:id_client]).destroy
+    render js: "location.reload();"
   end
 end

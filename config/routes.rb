@@ -10,7 +10,7 @@ SlobodaDoc::Application.routes.draw do
 
   post "programmer/update"
 
-  get "programmer/delete"
+  post "programmer/delete"
 
   get "manager/show"
 
@@ -22,7 +22,7 @@ SlobodaDoc::Application.routes.draw do
 
   put "manager/update"
 
-  get "manager/delete"
+  post "manager/delete"
 
   get "client/show"
 
@@ -32,7 +32,7 @@ SlobodaDoc::Application.routes.draw do
 
   post "client/update"
 
-  get "client/delete"
+  post "client/delete"
 
   root :to => 'project#projects'
 

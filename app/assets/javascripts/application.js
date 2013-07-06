@@ -198,7 +198,7 @@ $(document).ready(function()
     }
   });
 
-    $(".delete-client").click(function()
+  $(".delete-client").click(function()
   {
     if (confirm('Удалить клиента?'))
     {
@@ -212,7 +212,7 @@ $(document).ready(function()
     }
   });
 
-        $(".delete-manager").click(function()
+  $(".delete-manager").click(function()
   {
     if (confirm('Удалить клиента?'))
     {
@@ -226,7 +226,7 @@ $(document).ready(function()
     }
   });
 
-            $(".delete-programmer").click(function()
+  $(".delete-programmer").click(function()
   {
     if (confirm('Удалить клиента?'))
     {

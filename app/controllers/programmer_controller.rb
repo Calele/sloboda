@@ -27,5 +27,7 @@ class ProgrammerController < ApplicationController
   end
 
   def delete
+    Programmer.find(params[:id_programmer]).destroy
+    render js: "location.reload();"
   end
 end

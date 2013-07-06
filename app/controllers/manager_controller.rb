@@ -29,6 +29,8 @@ class ManagerController < ApplicationController
   end
 
   def delete
+    Manager.find(params[:id_manager]).destroy
+    render js: "location.reload();"
   end
 end
 

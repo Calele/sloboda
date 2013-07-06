@@ -39,13 +39,21 @@
           <% @k = i %>
             <tr class = "project_id" project-id = "<%= project.id.to_s %>" >
               <td> <%= project.name %> </td>
-              <td> <%= project.client.last_name %> </td>
+              <% unless project.client.try(:last_name).nil? %>
+                <td> <%= project.client.last_name %> </td>
+              <% else %>
+                <td style="color: red;" >Removed</td>
+              <% end %>                
               <td class = "td_programmers" > 
                 <% project.programmers.each do |programmer| %> 
                   <%= programmer.last_name + ";" %>
                 <% end %>
               </td title="<%= project.comment %>" >
+              <% unless project.manager.try(:last_name).nil? %>
               <td> <%= project.manager.last_name %> </td>
+              <% else %>
+              <td style="color: red;" >Removed</td>
+              <% end %>
               <td> <%= project.status.title %> </td>
               <td> <%= project.date_of_start %> </td>
               <td> <%= project.deadline %> </td>

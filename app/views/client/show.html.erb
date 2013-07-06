@@ -17,6 +17,7 @@
         	<td>Last name</td>
           <td>Name</td>
           <td>Email</td>
+          <td width = "70">Delete</td>
           <td width = "50" rowspan="<% unless @clients_all.nil? %><%= @clients_all.length + 1 %><% end %>" style = "text-align: right; vertical-align: bottom;">
           <a id="a_Add" role="button" class="btn">Add</a>
           </td>
@@ -28,6 +29,13 @@
 	            <td> <%= client.last_name %> </td>	            
 	            <td> <%= client.first_name %> </td>
 	            <td> <%= client.email %> </td>
+              <td style = "text-align: center; vertical-align: middle;">
+                <a 
+                id-client="<%= client.id %>" 
+                role="button" 
+                class="btn delete-client">Delete
+                </a>
+              </td>
 	          </tr>
           <% end %>
         <% end %>
