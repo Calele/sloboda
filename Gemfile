@@ -23,6 +23,7 @@ end
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem "jquery-validation-rails"
+gem 'date_validator'
 
 group :test do
   gem 'capybara', '1.1.2'

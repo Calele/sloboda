@@ -122,17 +122,23 @@ $(document).ready(function()
     success: "valid"
   });
 
+  $.validator.addMethod("endDate", function(value, element) 
+  {
+    var startDate = $('.date-of-start').val();
+    return Date.parse(startDate) <= Date.parse(value) || value == "";
+  }, "* End date must be after start date");
+
   $.validator.addMethod("deadline", function(value, element) 
   {
     return /(\d{4}\-\d{2}\-\d{2})/.test(value);
   },
-  "Date is not valid.")
+  "Date is not valid.");
 
   $.validator.addMethod("mynumbers", function(value, element) 
   {
     return /^\d*\.?\d*$/.test(value);
   },
-  "Please enter number, like this '1,0'.")
+  "Please enter number, like this '1,0'.");
 
   $("#addForm").validate
   ({
@@ -152,8 +158,6 @@ $(document).ready(function()
       "project[deadline]": {required: true, deadline: true},
       "project[totally]": {required: true, mynumbers: true},
       "project[paid]": {required: true, mynumbers: true},
-      "project[to_pay]": {required: true, mynumbers: true},
-      "project[comment]": {required: true}
     }
   });
 
@@ -178,7 +182,6 @@ $(document).ready(function()
         "project[totally]": {required: true, mynumbers: true},
         "project[paid]": {required: true, mynumbers: true},
         "project[to_pay]": {required: true, mynumbers: true},
-        "project[comment]": {required: true}
       }
     });
   }

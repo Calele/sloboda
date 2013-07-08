@@ -24,7 +24,7 @@ class ProjectController < ApplicationController
       new_project.deadline = params[:project][:deadline]
       new_project.totally = params[:project][:totally] 
       new_project.paid = params[:project][:paid] 
-      new_project.to_pay = params[:project][:to_pay] 
+      new_project.to_pay = params[:project][:totally].to_f - params[:project][:paid].to_f
       new_project.comment = params[:project][:comment]
 
 
@@ -69,6 +69,7 @@ class ProjectController < ApplicationController
       render :partial => 'update'
 
     else
+      to_pay = params[:project][:totally].to_f - params[:project][:paid].to_f
       updated = Project.update(params[:project][:id], 
         :client_id => params[:project][:client], 
         :currency_id => params[:project][:currency],
@@ -79,7 +80,7 @@ class ProjectController < ApplicationController
         :deadline => params[:project][:deadline],
         :totally => params[:project][:totally],
         :paid => params[:project][:paid],
-        :to_pay => params[:project][:to_pay],
+        :to_pay => to_pay,
         :comment => params[:project][:comment])
 
       if updated

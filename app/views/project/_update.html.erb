@@ -30,7 +30,6 @@
           <%= project.input :totally, :as => :float, :label => "Totally:" %>
           <%= project.input :currency, :label => "Currency:", :collection => Currency.all.map{|currency| [currency.title, currency.id]}, :selected => @project_update.currency.id %>
           <%= project.input :paid, :as => :float, :label => "Paid:" %>
-          <%= project.input :to_pay, :as => :float, :label => "To pay:" %>
           <%= project.input :comment, :as => :text, :label => "Comment:" %>
           <%= project.collection_check_boxes :programmer_ids, Programmer.all, :id, :last_name, :item_wrapper_class => 'check_boxes' %>
           <%= project.button :submit %>
