@@ -2,6 +2,7 @@ class ClientController < ApplicationController
   def show
   	@clients_all = Client.all
   	@client_new = Client.new
+    
   end
 
   def new

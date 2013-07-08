@@ -22,9 +22,8 @@
         <% if @project_update.manager.try(:id).nil? %>
           <%= project.input :manager, :label => "Manager:", :collection => Manager.all.map{|manager| [manager.last_name, manager.id]} %>
         <% else %> 
-                  <%= project.input :manager, :label => "Manager:", :collection => Manager.all.map{|manager| [manager.last_name, manager.id]}, :selected => @project_update.manager.id %>
+          <%= project.input :manager, :label => "Manager:", :collection => Manager.all.map{|manager| [manager.last_name, manager.id]}, :selected => @project_update.manager.id %>
         <% end %>
-
           <%= project.input :status, :label => "Status:", :collection => Status.all.map{|status| [status.title, status.id]}, :selected => @project_update.status.id %>
           <%= project.input :date_of_start, :as => :string, input_html: { class: 'datepicker' } %>
           <%= project.input :deadline, :as => :string, input_html: { class: 'datepicker' } %>

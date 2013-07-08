@@ -35,6 +35,14 @@
   padding-right: 5px;
  }
 
+
  table.mytable td.td_programmers{
  	overflow: auto;
  }
+ table.title{
+ 	margin-bottom: 1px;
+ }
+
+ table.title td.title{
+ 	 text-align: center; 
+ 	}
